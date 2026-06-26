@@ -19,16 +19,17 @@ Generates `resume.pdf` and `cover_letter.pdf` (if `coverLetter` section exists) 
 
 ## JSON Format
 
-Uses the [jsonresume](https://jsonresume.org/) schema with an optional `coverLetter` section:
+Uses a custom ATS-optimized schema (`schema.json`). See `resume.json` for a full example.
 
 ```json
 {
   "basics": {
     "name": "Your Name",
+    "label": "Senior DevOps Engineer",
     "email": "you@email.com",
     "phone": "+1 234 567 890",
+    "summary": "Front-load with title + years + key skills + metrics.",
     "location": { "city": "City", "region": "Country" },
-    "summary": "Brief professional summary...",
     "profiles": [
       { "network": "LinkedIn", "username": "your-profile", "url": "https://linkedin.com/in/your-profile" }
     ]
@@ -37,10 +38,18 @@ Uses the [jsonresume](https://jsonresume.org/) schema with an optional `coverLet
     {
       "name": "Company",
       "position": "Role",
+      "location": "City, Country",
       "startDate": "2024-01",
       "endDate": null,
-      "highlights": ["Achievement 1", "Achievement 2"]
+      "summary": "One-line overview of responsibilities.",
+      "highlights": [
+        "Achievement with metric — reduced X by 25%",
+        "Led Y adopted by 12+ engineers"
+      ]
     }
+  ],
+  "skills": [
+    { "name": "DevOps", "level": "Expert", "keywords": ["Jenkins", "Docker", "GitHub Actions"] }
   ],
   "education": [
     {
@@ -48,14 +57,15 @@ Uses the [jsonresume](https://jsonresume.org/) schema with an optional `coverLet
       "area": "Field of Study",
       "studyType": "B.Sc.",
       "startDate": "2020",
-      "endDate": "2024"
+      "endDate": "2024",
+      "courses": ["Relevant Course 1", "Relevant Course 2"]
     }
   ],
-  "skills": [
-    { "name": "Category", "keywords": ["Skill 1", "Skill 2"] }
-  ],
   "projects": [
-    { "name": "Project", "description": "Brief description" }
+    { "name": "Project", "description": "Brief description", "keywords": ["Python", "Docker"] }
+  ],
+  "certificates": [
+    { "name": "AWS Solutions Architect", "issuer": "Amazon", "date": "2024-06" }
   ],
   "languages": [
     { "language": "English", "fluency": "Native" }
@@ -72,6 +82,14 @@ Uses the [jsonresume](https://jsonresume.org/) schema with an optional `coverLet
   }
 }
 ```
+
+## ATS Tips
+
+- **Keywords**: Mirror the job posting's exact phrasing
+- **Metrics**: Quantify achievements (e.g. "reduced by 25%", "adopted by 12+ engineers")
+- **Summary**: Front-load with job title + years + key skills
+- **Skills level**: Use `Master`/`Expert`/`Advanced` — ATS filters on these
+- **Certificates**: High-value for ATS filtering
 
 ## Requirements
 
