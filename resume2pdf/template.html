@@ -3,290 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <title>{{ resume.basics.name }} — CV</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   @page { size: A4; margin: 0; }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     color: #1a1a1a;
     font-size: 8.5pt;
     line-height: 1.5;
   }
 
   .page {
-    background: #faf9f7;
     width: 210mm;
     min-height: 297mm;
-    margin: 0 auto;
-    display: grid;
-    grid-template-rows: auto 1fr;
   }
 
-  /* ── HEADER ── */
   header {
-    padding: 20px 28px 16px;
+    padding: 18px 28px 14px;
     border-bottom: 2px solid #1a1a1a;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 16px;
   }
 
-  .name {
-    font-size: 22pt;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    color: #1a1a1a;
-  }
+  .header-row { display: table; width: 100%; }
+  .name-cell { display: table-cell; vertical-align: bottom; }
+  .contact-cell { display: table-cell; vertical-align: bottom; text-align: right; }
 
-  .name span { color: #c0392b; }
-
-  .contact {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    font-size: 7pt;
-    color: #5a5a5a;
-    font-family: 'DM Mono', monospace;
-    white-space: nowrap;
-  }
-
+  .name { font-size: 22pt; font-weight: 700; line-height: 1; }
+  .label { font-size: 8pt; color: #5a5a5a; margin-top: 2px; font-weight: 500; }
+  .contact { font-size: 7pt; color: #5a5a5a; }
   .contact a { color: #5a5a5a; text-decoration: none; }
 
-  /* ── BODY COLUMNS ── */
-  .body {
-    display: grid;
-    grid-template-columns: 210px 1fr;
-  }
-
-  /* ── LEFT SIDEBAR ── */
+  .columns { display: table; width: 100%; }
   .sidebar {
-    padding: 16px 12px 16px 24px;
+    display: table-cell;
+    width: 210px;
+    padding: 14px 12px 14px 24px;
     border-right: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    vertical-align: top;
   }
-
-  /* ── RIGHT MAIN ── */
   .main {
-    padding: 16px 28px 16px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: table-cell;
+    padding: 14px 28px 14px 20px;
+    vertical-align: top;
   }
 
-  /* ── SECTION ── */
   .section-label {
-    font-size: 6pt;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #c0392b;
-    margin-bottom: 7px;
-    padding-bottom: 3px;
+    font-size: 6pt; font-weight: 700; text-transform: uppercase;
+    color: #c0392b; margin-bottom: 6px; padding-bottom: 3px;
     border-bottom: 1px solid #ddd;
   }
 
-  /* ── SIDEBAR BLOCKS ── */
-  .sidebar .block { display: flex; flex-direction: column; gap: 0; }
+  .block { margin-bottom: 14px; }
 
-  .skill-group-title {
-    font-size: 6.5pt;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 3px;
-    margin-top: 6px;
-  }
+  .skill-group-header { margin-bottom: 2px; margin-top: 5px; overflow: hidden; }
+  .skill-group-header:first-child { margin-top: 0; }
+  .skill-group-title { font-size: 6.5pt; font-weight: 600; display: inline; }
+  .skill-level { font-size: 5.5pt; color: #8a8a8a; font-style: italic; display: inline; float: right; }
 
-  .skill-group-title:first-child { margin-top: 0; }
-
-  .pills { display: flex; flex-wrap: wrap; gap: 3px; }
-
+  .pills { overflow: hidden; }
   .pill {
-    background: #efefed;
-    border-radius: 3px;
-    padding: 1px 6px;
-    font-size: 6.5pt;
-    color: #1a1a1a;
-    font-weight: 400;
+    background: #efefed; border-radius: 3px; padding: 1px 6px;
+    font-size: 6.5pt; float: left; margin: 0 3px 3px 0;
   }
+  .pill.accent { background: #c0392b; color: white; font-weight: 500; }
 
-  .pill.accent {
-    background: #c0392b;
-    color: white;
-    font-weight: 500;
-  }
-
-  /* ── LINKS ── */
-  .link-row {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 5px;
-  }
-
+  .link-row { margin-bottom: 4px; overflow: hidden; }
   .link-icon {
-    width: 18px; height: 18px;
-    border-radius: 4px;
-    background: #1a1a1a;
-    color: white;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    font-size: 9pt;
-    font-weight: 700;
+    width: 18px; height: 18px; border-radius: 4px; background: #1a1a1a;
+    color: white; float: left; margin-right: 6px; text-align: center;
+    font-size: 9pt; font-weight: 700; line-height: 18px;
   }
-
-  .link-text { font-size: 7pt; color: #5a5a5a; }
+  .link-text { font-size: 7pt; color: #5a5a5a; line-height: 18px; }
   .link-text a { color: #5a5a5a; text-decoration: none; }
 
-  /* ── PROJECTS ── */
-  .project { margin-bottom: 6px; }
+  .project { margin-bottom: 5px; }
+  .project-name { font-size: 7pt; font-weight: 600; }
+  .project-desc { font-size: 6.5pt; color: #5a5a5a; line-height: 1.4; }
+  .project-keywords { overflow: hidden; margin-top: 2px; }
+  .project-keywords .pill { font-size: 5.5pt; padding: 0 4px; }
 
-  .project-name {
-    font-size: 7pt;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
+  .edu-item { margin-bottom: 5px; }
+  .edu-school { font-size: 7pt; font-weight: 600; }
+  .edu-degree { font-size: 6.5pt; color: #5a5a5a; }
+  .edu-years { font-size: 6pt; color: #8a8a8a; }
+  .edu-courses { font-size: 6pt; color: #8a8a8a; margin-top: 2px; font-style: italic; }
 
-  .project-desc {
-    font-size: 6.5pt;
-    color: #5a5a5a;
-    line-height: 1.4;
-  }
+  .cert-item { margin-bottom: 4px; }
+  .cert-name { font-size: 7pt; font-weight: 600; }
+  .cert-issuer { font-size: 6pt; color: #5a5a5a; }
+  .cert-date { font-size: 5.5pt; color: #8a8a8a; }
 
-  /* ── EDUCATION ── */
-  .edu-item { margin-bottom: 6px; }
-
-  .edu-school {
-    font-size: 7pt;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
-
-  .edu-degree {
-    font-size: 6.5pt;
-    color: #5a5a5a;
-  }
-
-  .edu-years {
-    font-family: 'DM Mono', monospace;
-    font-size: 6pt;
-    color: #8a8a8a;
-  }
-
-  /* ── LANGUAGES ── */
   .lang-item { margin-bottom: 3px; }
   .lang-name { font-size: 7pt; font-weight: 600; }
   .lang-level { font-size: 6.5pt; color: #5a5a5a; }
 
-  /* ── MAIN BLOCKS ── */
   .statement {
-    font-size: 7.5pt;
-    color: #5a5a5a;
-    line-height: 1.5;
-    border-left: 2px solid #c0392b;
-    padding-left: 10px;
+    font-size: 7.5pt; color: #5a5a5a; line-height: 1.5;
+    border-left: 2px solid #c0392b; padding-left: 10px;
   }
-
   .statement strong { color: #1a1a1a; font-weight: 600; }
 
-  /* ── JOB ── */
-  .job { margin-bottom: 12px; }
-  .job:last-child { margin-bottom: 0; }
-
-  .job-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 2px;
-    gap: 8px;
-  }
-
-  .job-title {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: #1a1a1a;
-  }
-
-  .job-meta {
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .job-company {
-    font-size: 7pt;
-    font-weight: 500;
-    color: #c0392b;
-  }
-
-  .job-dates {
-    font-family: 'DM Mono', monospace;
-    font-size: 6pt;
-    color: #8a8a8a;
-    display: block;
-  }
-
-  .job-bullets {
-    margin-top: 3px;
-    padding-left: 0;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
+  .job { margin-bottom: 10px; }
+  .job-header { margin-bottom: 2px; overflow: hidden; }
+  .job-header-left { float: left; }
+  .job-header-right { float: right; text-align: right; }
+  .job-title { font-size: 8.5pt; font-weight: 700; }
+  .job-company { font-size: 7pt; font-weight: 500; color: #c0392b; }
+  .job-location { font-size: 6pt; color: #8a8a8a; }
+  .job-dates { font-size: 6pt; color: #8a8a8a; display: block; }
+  .job-summary { font-size: 6.5pt; color: #5a5a5a; font-style: italic; margin: 2px 0 3px; }
+  .job-bullets { margin-top: 3px; padding-left: 0; list-style: none; }
   .job-bullets li {
-    font-size: 7pt;
-    color: #5a5a5a;
-    padding-left: 10px;
-    position: relative;
+    font-size: 7pt; color: #5a5a5a; padding-left: 10px;
+    position: relative; margin-bottom: 2px;
   }
-
-  .job-bullets li::before {
-    content: '\2014';
-    position: absolute;
-    left: 0;
-    color: #c0392b;
-    font-size: 6.5pt;
+  .job-bullets li:before {
+    content: '\2014'; position: absolute; left: 0;
+    color: #c0392b; font-size: 6.5pt;
   }
-
   .job-bullets li strong { color: #1a1a1a; font-weight: 600; }
 
-  .divider {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 2px 0 10px;
-  }
+  .divider { border: none; border-top: 1px solid #ddd; margin: 2px 0 8px; }
 </style>
 </head>
 <body>
 <div class="page">
 
   <header>
-    <div>
-      <div class="name">{{ resume.basics.name }}</div>
-    </div>
-    <div class="contact">
-      {% if resume.basics.email %}
-      <a href="mailto:{{ resume.basics.email }}">{{ resume.basics.email }}</a>
-      {% endif %}
-      {% if resume.basics.phone %}
-      <span>{{ resume.basics.phone }}</span>
-      {% endif %}
-      {% if resume.basics.location %}
-      <span>{{ resume.basics.location.city }}{% if resume.basics.location.region %}, {{ resume.basics.location.region }}{% endif %}</span>
-      {% endif %}
+    <div class="header-row">
+      <div class="name-cell">
+        <div class="name">{{ resume.basics.name }}</div>
+        {% if resume.basics.label %}<div class="label">{{ resume.basics.label }}</div>{% endif %}
+      </div>
+      <div class="contact-cell">
+        <div class="contact">
+          {% if resume.basics.email %}<a href="mailto:{{ resume.basics.email }}">{{ resume.basics.email }}</a><br>{% endif %}
+          {% if resume.basics.phone %}{{ resume.basics.phone }}<br>{% endif %}
+          {% if resume.basics.location %}{{ resume.basics.location.city }}{% if resume.basics.location.region %}, {{ resume.basics.location.region }}{% endif %}{% endif %}
+        </div>
+      </div>
     </div>
   </header>
 
-  <div class="body">
-
-    <aside class="sidebar">
+  <div class="columns">
+    <div class="sidebar">
 
       {% if resume.basics.profiles %}
       <div class="block">
@@ -304,11 +164,27 @@
       <div class="block">
         <div class="section-label">Core Skills</div>
         {% for skill in resume.skills %}
-        <div class="skill-group-title">{{ skill.name }}</div>
+        <div class="skill-group-header">
+          <div class="skill-group-title">{{ skill.name }}</div>
+          {% if skill.level %}<div class="skill-level">{{ skill.level }}</div>{% endif %}
+        </div>
         <div class="pills">
           {% for keyword in skill.keywords %}
           <span class="pill{% if loop.index <= 2 %} accent{% endif %}">{{ keyword }}</span>
           {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if resume.certificates %}
+      <div class="block">
+        <div class="section-label">Certifications</div>
+        {% for cert in resume.certificates %}
+        <div class="cert-item">
+          <div class="cert-name">{{ cert.name }}</div>
+          {% if cert.issuer %}<div class="cert-issuer">{{ cert.issuer }}</div>{% endif %}
+          {% if cert.date %}<div class="cert-date">{{ cert.date }}</div>{% endif %}
         </div>
         {% endfor %}
       </div>
@@ -321,6 +197,11 @@
         <div class="project">
           <div class="project-name">{{ project.name }}</div>
           <div class="project-desc">{{ project.description }}</div>
+          {% if project.keywords %}
+          <div class="project-keywords">
+            {% for kw in project.keywords %}<span class="pill">{{ kw }}</span>{% endfor %}
+          </div>
+          {% endif %}
         </div>
         {% endfor %}
       </div>
@@ -334,6 +215,7 @@
           <div class="edu-school">{{ edu.institution }}</div>
           <div class="edu-degree">{{ edu.studyType }} {{ edu.area }}</div>
           <div class="edu-years">{{ edu.startDate }} – {{ edu.endDate }}</div>
+          {% if edu.courses %}<div class="edu-courses">Courses: {{ edu.courses | join(', ') }}</div>{% endif %}
         </div>
         {% endfor %}
       </div>
@@ -351,47 +233,83 @@
       </div>
       {% endif %}
 
-    </aside>
+    </div>
 
-    <main class="main">
+    <div class="main">
 
       {% if resume.basics.summary %}
-      <div>
+      <div class="block">
         <div class="section-label">Profile</div>
         <p class="statement">{{ resume.basics.summary }}</p>
       </div>
       {% endif %}
 
       {% if resume.work %}
-      <div>
+      <div class="block">
         <div class="section-label">Experience</div>
         {% for job in resume.work %}
         <div class="job">
           <div class="job-header">
-            <div>
+            <div class="job-header-left">
               <div class="job-title">{{ job.position }}</div>
-              <div class="job-company">{{ job.name }}</div>
+              <div class="job-company">{{ job.name }}{% if job.location %} <span class="job-location">· {{ job.location }}</span>{% endif %}</div>
             </div>
-            <div class="job-meta">
+            <div class="job-header-right">
               <span class="job-dates">{{ job.startDate }} – {{ job.endDate if job.endDate else 'Present' }}</span>
             </div>
           </div>
+          {% if job.summary %}<div class="job-summary">{{ job.summary }}</div>{% endif %}
           {% if job.highlights %}
           <ul class="job-bullets">
-            {% for highlight in job.highlights %}
-            <li>{{ highlight }}</li>
-            {% endfor %}
+            {% for highlight in job.highlights %}<li>{{ highlight }}</li>{% endfor %}
           </ul>
           {% endif %}
         </div>
-        {% if not loop.last %}
-        <hr class="divider">
-        {% endif %}
+        {% if not loop.last %}<hr class="divider">{% endif %}
         {% endfor %}
       </div>
       {% endif %}
 
-    </main>
+      {% if resume.volunteer %}
+      <div class="block">
+        <div class="section-label">Volunteer</div>
+        {% for vol in resume.volunteer %}
+        <div class="job">
+          <div class="job-header">
+            <div class="job-header-left">
+              <div class="job-title">{{ vol.position }}</div>
+              <div class="job-company">{{ vol.organization }}</div>
+            </div>
+            <div class="job-header-right">
+              <span class="job-dates">{{ vol.startDate }} – {{ vol.endDate if vol.endDate else 'Present' }}</span>
+            </div>
+          </div>
+          {% if vol.summary %}<div class="job-summary">{{ vol.summary }}</div>{% endif %}
+          {% if vol.highlights %}
+          <ul class="job-bullets">
+            {% for highlight in vol.highlights %}<li>{{ highlight }}</li>{% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+        {% if not loop.last %}<hr class="divider">{% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% if resume.awards %}
+      <div class="block">
+        <div class="section-label">Awards</div>
+        {% for award in resume.awards %}
+        <div class="cert-item">
+          <div class="cert-name">{{ award.title }}</div>
+          {% if award.awarder %}<div class="cert-issuer">{{ award.awarder }}</div>{% endif %}
+          {% if award.date %}<div class="cert-date">{{ award.date }}</div>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </div>
   </div>
 
 </div>

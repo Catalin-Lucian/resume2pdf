@@ -1,0 +1,228 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resume Schema (ATS-Optimized)",
+  "type": "object",
+  "required": ["basics"],
+  "properties": {
+    "basics": {
+      "type": "object",
+      "required": ["name", "email"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name"
+        },
+        "label": {
+          "type": "string",
+          "description": "Job title, e.g. Senior DevOps Engineer"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Personal website"
+        },
+        "summary": {
+          "type": "string",
+          "description": "2-3 sentences. Front-load with title + years + key skills."
+        },
+        "location": {
+          "type": "object",
+          "properties": {
+            "address": { "type": "string" },
+            "postalCode": { "type": "string" },
+            "city": { "type": "string" },
+            "region": { "type": "string" },
+            "countryCode": { "type": "string" }
+          }
+        },
+        "profiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["network", "url"],
+            "properties": {
+              "network": { "type": "string" },
+              "username": { "type": "string" },
+              "url": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "work": {
+      "type": "array",
+      "description": "Work experience, most recent first",
+      "items": {
+        "type": "object",
+        "required": ["name", "position", "startDate"],
+        "properties": {
+          "name": { "type": "string", "description": "Company name" },
+          "location": { "type": "string" },
+          "description": { "type": "string", "description": "Company description" },
+          "position": { "type": "string", "description": "Job title" },
+          "url": { "type": "string", "format": "uri" },
+          "startDate": { "type": "string", "description": "YYYY-MM or YYYY-MM-DD" },
+          "endDate": { "type": ["string", "null"], "description": "YYYY-MM or null if current" },
+          "summary": { "type": "string", "description": "Overview of responsibilities" },
+          "highlights": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Achievements with metrics. Use: 'Did X, resulting in Y by Z%'"
+          }
+        }
+      }
+    },
+    "volunteer": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["organization", "position"],
+        "properties": {
+          "organization": { "type": "string" },
+          "position": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "startDate": { "type": "string" },
+          "endDate": { "type": ["string", "null"] },
+          "summary": { "type": "string" },
+          "highlights": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["institution", "area", "studyType"],
+        "properties": {
+          "institution": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "area": { "type": "string", "description": "Field of study" },
+          "studyType": { "type": "string", "description": "B.Sc., M.Sc., Ph.D., etc." },
+          "startDate": { "type": "string" },
+          "endDate": { "type": "string" },
+          "score": { "type": "string", "description": "GPA or grade, e.g. 3.8/4.0" },
+          "courses": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Relevant coursework"
+          }
+        }
+      }
+    },
+    "awards": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title"],
+        "properties": {
+          "title": { "type": "string" },
+          "date": { "type": "string" },
+          "awarder": { "type": "string" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "certificates": {
+      "type": "array",
+      "description": "Professional certifications (ATS high-value)",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string", "description": "e.g. AWS Solutions Architect" },
+          "date": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "issuer": { "type": "string" }
+        }
+      }
+    },
+    "publications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "publisher": { "type": "string" },
+          "releaseDate": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "summary": { "type": "string" }
+        }
+      }
+    },
+    "skills": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "keywords"],
+        "properties": {
+          "name": { "type": "string", "description": "Category, e.g. DevOps" },
+          "level": { "type": "string", "description": "Master, Expert, Advanced, Intermediate" },
+          "keywords": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Individual skills, e.g. Docker, Jenkins"
+          }
+        }
+      }
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["language"],
+        "properties": {
+          "language": { "type": "string" },
+          "fluency": { "type": "string" }
+        }
+      }
+    },
+    "interests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "keywords": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "highlights": { "type": "array", "items": { "type": "string" } },
+          "keywords": { "type": "array", "items": { "type": "string" } },
+          "startDate": { "type": "string" },
+          "endDate": { "type": ["string", "null"] },
+          "url": { "type": "string", "format": "uri" },
+          "roles": { "type": "array", "items": { "type": "string" } },
+          "entity": { "type": "string" },
+          "type": { "type": "string" }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "reference"],
+        "properties": {
+          "name": { "type": "string" },
+          "reference": { "type": "string" }
+        }
+      }
+    }
+  }
+}
