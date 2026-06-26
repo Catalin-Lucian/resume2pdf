@@ -1,0 +1,17 @@
+[project]
+name = "resume2pdf"
+version = "0.1.0"
+description = "Convert resume.json to styled PDF"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.0",
+    "jinja2>=3.0",
+    "weasyprint>=60.0",
+]
+
+[project.scripts]
+resume = "resume2pdf.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

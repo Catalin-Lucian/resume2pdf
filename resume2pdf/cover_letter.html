@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cover Letter — {{ resume.basics.name }}</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 48px 72px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: #1a1a1a;
+    font-size: 10pt;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+
+  .page {
+    background: #faf9f7;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 16px;
+    margin-bottom: 28px;
+  }
+
+  .name {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: #1a1a1a;
+  }
+
+  .name span { color: #c0392b; }
+
+  .contact {
+    display: flex;
+    gap: 16px;
+    margin-top: 6px;
+    font-size: 8pt;
+    color: #5a5a5a;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .contact a { color: #5a5a5a; text-decoration: none; }
+
+  /* ── DATE ── */
+  .date {
+    font-family: 'DM Mono', monospace;
+    font-size: 8.5pt;
+    color: #8a8a8a;
+    margin-bottom: 24px;
+  }
+
+  /* ── RECIPIENT ── */
+  .recipient {
+    font-size: 9.5pt;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .recipient strong { font-weight: 600; }
+
+  /* ── SUBJECT ── */
+  .subject {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+  }
+
+  .subject span { color: #c0392b; }
+
+  /* ── BODY ── */
+  .body p {
+    margin-bottom: 14px;
+    color: #333;
+  }
+
+  .body p:last-child { margin-bottom: 0; }
+
+  /* ── CLOSING ── */
+  .closing {
+    margin-top: 28px;
+  }
+
+  .closing p {
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  .signature {
+    margin-top: 32px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="name">{{ resume.basics.name }}</div>
+    <div class="contact">
+      {% if resume.basics.email %}
+      <a href="mailto:{{ resume.basics.email }}">{{ resume.basics.email }}</a>
+      {% endif %}
+      {% if resume.basics.phone %}
+      <span>{{ resume.basics.phone }}</span>
+      {% endif %}
+      {% if resume.basics.location %}
+      <span>{{ resume.basics.location.city }}{% if resume.basics.location.region %}, {{ resume.basics.location.region }}{% endif %}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="date">{{ resume.coverLetter.date }}</div>
+
+  <div class="recipient">
+    <strong>{{ resume.coverLetter.recipient }}</strong><br>
+    {{ resume.coverLetter.company }}<br>
+    {% if resume.coverLetter.address %}
+    {{ resume.coverLetter.address }}<br>
+    {% endif %}
+  </div>
+
+  <div class="subject">Re: <span>{{ resume.coverLetter.position }}</span></div>
+
+  <div class="body">
+    <p>{{ resume.coverLetter.opening }}</p>
+    {% for paragraph in resume.coverLetter.body %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+  </div>
+
+  <div class="closing">
+    <p>{{ resume.coverLetter.closing }}</p>
+    <div class="signature">{{ resume.basics.name }}</div>
+  </div>
+
+</div>
+</body>
+</html>
